@@ -33,7 +33,7 @@ extern CGFloat kRNBlurViewMaxAlpha;
 extern CGFloat kRNBlurBounceOutDurationScale;
 
 extern NSString * const kRNBlurDidShowNotification;
-extern NSString * const kRNBlurDidHidewNotification;
+extern NSString * const kRNBlurDidHideNotification;
 
 @interface RNBlurModalView : UIView <UIGestureRecognizerDelegate>
 

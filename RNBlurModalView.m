@@ -44,7 +44,7 @@ CGFloat kRNBlurViewMaxAlpha = 1.f;
 CGFloat kRNBlurBounceOutDurationScale = 0.8f;
 
 NSString * const kRNBlurDidShowNotification = @"com.whoisryannystrom.RNBlurModalView.show";
-NSString * const kRNBlurDidHidewNotification = @"com.whoisryannystrom.RNBlurModalView.hide";
+NSString * const kRNBlurDidHideNotification = @"com.whoisryannystrom.RNBlurModalView.hide";
 
 typedef void (^RNBlurCompletion)(void);
 
@@ -383,7 +383,7 @@ typedef void (^RNBlurCompletion)(void);
                                  _blurView = nil;
                                  [self removeFromSuperview];
                                  
-                                 [[NSNotificationCenter defaultCenter] postNotificationName:kRNBlurDidHidewNotification object:nil];
+                                 [[NSNotificationCenter defaultCenter] postNotificationName:kRNBlurDidHideNotification object:nil];
                                  self.isVisible = NO;
                                  if (completion) {
                                      completion();
