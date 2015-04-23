@@ -43,8 +43,7 @@ CGFloat kRNBlurViewMaxAlpha = 1.f;
 
 CGFloat kRNBlurBounceOutDurationScale = 0.8f;
 
-// Left/right margins to use for custom view modals
-CGFloat kRNBlurHorizontalMargins = 16.f;
+CGFloat kRNBlurModalWidth = 288.f;
 
 NSString * const kRNBlurDidShowNotification = @"com.whoisryannystrom.RNBlurModalView.show";
 NSString * const kRNBlurDidHideNotification = @"com.whoisryannystrom.RNBlurModalView.hide";
@@ -206,8 +205,8 @@ typedef void (^RNBlurCompletion)(void);
         [self addSubview:view];
         _contentView = view;
 
-		// left/right gaps around modal
-		NSString *vf = [NSString stringWithFormat:@"H:|-%f-[view]-%f-|", kRNBlurHorizontalMargins, kRNBlurHorizontalMargins];
+		// constant width
+		NSString *vf = [NSString stringWithFormat:@"H:[view(%f)]", kRNBlurModalWidth];
 		[self addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: vf options: nil metrics: nil views: @{@"view": view}]];
 		// center the modal (this can't be done using visual format language)
 		[self addConstraint:[NSLayoutConstraint constraintWithItem:view
@@ -215,6 +214,12 @@ typedef void (^RNBlurCompletion)(void);
 														 relatedBy:NSLayoutRelationEqual
 															toItem:self
 														 attribute:NSLayoutAttributeCenterY
+														multiplier:1.f constant:0.f]];
+		[self addConstraint:[NSLayoutConstraint constraintWithItem:view
+														 attribute:NSLayoutAttributeCenterX
+														 relatedBy:NSLayoutRelationEqual
+															toItem:self
+														 attribute:NSLayoutAttributeCenterX
 														multiplier:1.f constant:0.f]];
 
         _controller = nil;
