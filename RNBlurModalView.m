@@ -316,9 +316,10 @@ typedef void (^RNBlurCompletion)(void);
     self.animationDelay = delay;
     self.animationOptions = options;
     _completion = [completion copy];
-    
+
+	[self delayedShow];
     // delay so we dont get button states
-    [self performSelector:@selector(delayedShow) withObject:nil afterDelay:kRNBlurDefaultDelay];
+    //[self performSelector:@selector(delayedShow) withObject:nil afterDelay:kRNBlurDefaultDelay];
 }
 
 
