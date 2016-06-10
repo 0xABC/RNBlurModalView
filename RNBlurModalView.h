@@ -56,6 +56,7 @@ extern NSString * const kRNBlurDidHideNotification;
 - (id)initWithParentView:(UIView*)parentView view:(UIView*)view;
 - (id)initWithParentView:(UIView*)parentView title:(NSString*)title message:(NSString*)message;
 - (id)initWithView:(UIView*)view;
+- (id)initWithView:(UIView*)view width:(CGFloat)width;
 - (id)initWithTitle:(NSString*)title message:(NSString*)message;
 
 - (void)show;

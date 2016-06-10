@@ -93,6 +93,7 @@ typedef void (^RNBlurCompletion)(void);
     RNCloseButton *_dismissButton;
     RNBlurView *_blurView;
     RNBlurCompletion _completion;
+    CGFloat *_preferredWidth;
 }
 
 + (UIView*)generateModalViewWithTitle:(NSString*)title message:(NSString*)message {
@@ -205,8 +206,9 @@ typedef void (^RNBlurCompletion)(void);
         [self addSubview:view];
         _contentView = view;
 
-		// constant width
-		NSString *vf = [NSString stringWithFormat:@"H:[view(%f)]", kRNBlurModalWidth];
+		//customzied width or constant width when customized one not presented
+		CGFloat width = (_preferredWidth != NULL) ? *_preferredWidth : kRNBlurModalWidth;
+		NSString *vf = [NSString stringWithFormat:@"H:[view(%f)]", width];
 		[self addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: vf options: nil metrics: nil views: @{@"view": view}]];
 		// center the modal (this can't be done using visual format language)
 		[self addConstraint:[NSLayoutConstraint constraintWithItem:view
@@ -247,6 +249,15 @@ typedef void (^RNBlurCompletion)(void);
         // nothing to see here
     }
     return self;
+}
+
+- (id)initWithView:(UIView *)view width:(CGFloat)width {
+	_preferredWidth = (CGFloat *)malloc(sizeof(CGFloat));
+	*_preferredWidth = width;
+	if (self = [self initWithParentView:[[UIApplication sharedApplication].delegate window].rootViewController.view view:view]) {
+		// nothing to see here
+	}
+	return self;
 }
 
 - (id)initWithTitle:(NSString*)title message:(NSString*)message {
